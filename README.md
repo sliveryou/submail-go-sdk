@@ -1,2 +1,3 @@
-# submail-go-sdk
+# Submail sdk for go
+
 Submail sdk for go.
