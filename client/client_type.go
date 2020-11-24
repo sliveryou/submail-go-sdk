@@ -40,7 +40,9 @@ var (
 
 // Param is the interface that wraps the Params and RequestURL methods.
 type Param interface {
+	// Params returns the params in the form of url.Values.
 	Params() (url.Values, error)
+	// RequestURL returns the request url of the param.
 	RequestURL() string
 }
 
