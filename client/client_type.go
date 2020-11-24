@@ -5,27 +5,27 @@ import (
 )
 
 const (
-	// Request sign type normal.
+	// SignTypeNormal represents the request sign type normal.
 	SignTypeNormal = "normal"
-	// Request sign type sha1.
+	// SignTypeSha1 represents the request sign type sha1.
 	SignTypeSha1 = "sha1"
-	// Request sign type md5.
+	// SignTypeMd5 represents the request sign type md5.
 	SignTypeMd5 = "md5"
 
-	// Response status success.
+	// StatusSuccess represents the response status success.
 	StatusSuccess = "success"
-	// Response status error.
+	// StatusError represents the response status error.
 	StatusError = "error"
 
-	// Submail api domain.
+	// APIDomain represents the submail api domain.
 	APIDomain = "https://api.mysubmail.com"
 
-	// Submail timestamp service url.
+	// timestampURL represents the submail timestamp service url.
 	timestampURL = APIDomain + "/service/timestamp"
 )
 
 var (
-	// Request not sign params.
+	// notSignParams represents the request not sign params.
 	notSignParams = map[string]struct{}{
 		"content":     {},
 		"vars":        {},

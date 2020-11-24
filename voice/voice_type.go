@@ -8,11 +8,11 @@ import (
 )
 
 const (
-	// Submail voice send service url.
+	// sendURL represents the submail voice send service url.
 	sendURL = client.APIDomain + "/voice/send"
-	// Submail voice xsend service url.
+	// xsendURL represents the submail voice xsend service url.
 	xsendURL = client.APIDomain + "/voice/xsend"
-	// Submail voice multixsend service url.
+	// multixsendURL represents the submail voice multixsend service url.
 	multixsendURL = client.APIDomain + "/voice/multixsend"
 )
 

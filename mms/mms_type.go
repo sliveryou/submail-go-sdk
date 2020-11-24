@@ -8,9 +8,9 @@ import (
 )
 
 const (
-	// Submail mms xsend service url.
+	// xsendURL represents the submail mms xsend service url.
 	xsendURL = client.APIDomain + "/mms/xsend"
-	// Submail mms multixsend service url.
+	// multixsendURL represents the submail mms multixsend service url.
 	multixsendURL = client.APIDomain + "/mms/multixsend"
 )
 

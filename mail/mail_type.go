@@ -10,9 +10,9 @@ import (
 )
 
 const (
-	// Submail mail send service url.
+	// sendURL represents the submail mail send service url.
 	sendURL = client.APIDomain + "/mail/send"
-	// Submail mail xsend service url.
+	// xsendURL represents the submail mail xsend service url.
 	xsendURL = client.APIDomain + "/mail/xsend"
 )
 

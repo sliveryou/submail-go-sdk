@@ -8,13 +8,13 @@ import (
 )
 
 const (
-	// Submail sms send service url.
+	// sendURL represents the submail sms send service url.
 	sendURL = client.APIDomain + "/message/send"
-	// Submail sms xsend service url.
+	// xsendURL represents the submail sms xsend service url.
 	xsendURL = client.APIDomain + "/message/xsend"
-	// Submail sms multisend service url.
+	// multisendURL represents the submail sms multisend service url.
 	multisendURL = client.APIDomain + "/message/multisend"
-	// Submail sms multixsend service url.
+	// multixsendURL represents the submail sms multixsend service url.
 	multixsendURL = client.APIDomain + "/message/multixsend"
 )
 

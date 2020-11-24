@@ -8,11 +8,11 @@ import (
 )
 
 const (
-	// Submail internationalsms send service url.
+	// sendURL represents the submail internationalsms send service url.
 	sendURL = client.APIDomain + "/internationalsms/send"
-	// Submail internationalsms xsend service url.
+	// xsendURL represents the submail internationalsms xsend service url.
 	xsendURL = client.APIDomain + "/internationalsms/xsend"
-	// Submail internationalsms multixsend service url.
+	// multixsendURL represents the submail internationalsms multixsend service url.
 	multixsendURL = client.APIDomain + "/internationalsms/multixsend"
 )
 
