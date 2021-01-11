@@ -27,6 +27,7 @@ const (
 var (
 	// notSignParams represents the request not sign params.
 	notSignParams = map[string]struct{}{
+		"tag":         {},
 		"content":     {},
 		"vars":        {},
 		"multi":       {},

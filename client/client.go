@@ -52,7 +52,7 @@ func (c *Client) Sign(param Param) (url.Values, error) {
 			return nil, err
 		}
 
-		params.Add("timestampResp", timestamp)
+		params.Add("timestamp", timestamp)
 		params.Add("sign_type", c.signType)
 		params.Add("sign_version", "2")
 	}
