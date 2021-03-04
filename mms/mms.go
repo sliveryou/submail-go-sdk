@@ -6,8 +6,8 @@ import (
 
 // New returns the submail mms client,
 // more look at: https://www.mysubmail.com/documents/Ww6KQ3
-func New(appId, appKey, signType string) *Client {
-	return &Client{Client: client.New(appId, appKey, signType)}
+func New(appId, appKey, signType string, opts ...client.OptionFunc) *Client {
+	return &Client{Client: client.New(appId, appKey, signType, opts...)}
 }
 
 // XSend requests the submail mms xsend service by param,

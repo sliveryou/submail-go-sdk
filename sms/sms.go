@@ -6,8 +6,8 @@ import (
 
 // New returns the submail sms client,
 // more look at: https://www.mysubmail.com/documents/LJ4xa2
-func New(appId, appKey, signType string) *Client {
-	return &Client{Client: client.New(appId, appKey, signType)}
+func New(appId, appKey, signType string, opts ...client.OptionFunc) *Client {
+	return &Client{Client: client.New(appId, appKey, signType, opts...)}
 }
 
 // Send requests the submail sms send service by param,

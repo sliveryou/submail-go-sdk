@@ -6,8 +6,8 @@ import (
 
 // New returns the submail internationalsms client,
 // more look at: https://www.mysubmail.com/documents/gQn2R3
-func New(appId, appKey, signType string) *Client {
-	return &Client{Client: client.New(appId, appKey, signType)}
+func New(appId, appKey, signType string, opts ...client.OptionFunc) *Client {
+	return &Client{Client: client.New(appId, appKey, signType, opts...)}
 }
 
 // Send requests the submail internationalsms send service by param,

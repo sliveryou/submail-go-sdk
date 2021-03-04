@@ -49,8 +49,6 @@ type SendParam struct {
 // Params implements the client.Param interface Params method.
 func (p *SendParam) Params() (url.Values, error) {
 	params := url.Values{}
-	params.Add("from", p.From)
-	params.Add("subject", p.Subject)
 
 	if len(p.To) > 0 {
 		var receivers []string
@@ -58,6 +56,14 @@ func (p *SendParam) Params() (url.Values, error) {
 			receivers = append(receivers, fmt.Sprintf("%s<%s>", to.Name, to.Address))
 		}
 		params.Add("to", strings.Join(receivers, ","))
+	}
+
+	if p.Subject != "" {
+		params.Add("subject", p.Subject)
+	}
+
+	if p.From != "" {
+		params.Add("from", p.From)
 	}
 
 	if p.FromName != "" {
@@ -147,15 +153,12 @@ type XSendParam struct {
 	Links        map[string]string
 	Headers      map[string]string
 	Asynchronous bool
-	Attachments  []string
 	Tag          string
 }
 
 // Params implements the client.Param interface Params method.
 func (p *XSendParam) Params() (url.Values, error) {
 	params := url.Values{}
-	params.Add("from", p.From)
-	params.Add("subject", p.Subject)
 	params.Add("project", p.Project)
 
 	if len(p.To) > 0 {
@@ -164,6 +167,14 @@ func (p *XSendParam) Params() (url.Values, error) {
 			receivers = append(receivers, fmt.Sprintf("%s<%s>", to.Name, to.Address))
 		}
 		params.Add("to", strings.Join(receivers, ","))
+	}
+
+	if p.Subject != "" {
+		params.Add("subject", p.Subject)
+	}
+
+	if p.From != "" {
+		params.Add("from", p.From)
 	}
 
 	if p.FromName != "" {
@@ -217,10 +228,6 @@ func (p *XSendParam) Params() (url.Values, error) {
 		}
 
 		params.Add("headers", string(headers))
-	}
-
-	if len(p.Attachments) > 0 {
-		params.Add("attachments", strings.Join(p.Attachments, ","))
 	}
 
 	return params, nil

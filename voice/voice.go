@@ -6,8 +6,8 @@ import (
 
 // New returns the submail voice client,
 // more look at: https://www.mysubmail.com/documents/PopwU2
-func New(appId, appKey, signType string) *Client {
-	return &Client{Client: client.New(appId, appKey, signType)}
+func New(appId, appKey, signType string, opts ...client.OptionFunc) *Client {
+	return &Client{Client: client.New(appId, appKey, signType, opts...)}
 }
 
 // Send requests the submail voice send service by param,

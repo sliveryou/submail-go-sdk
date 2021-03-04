@@ -6,25 +6,39 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"net/http"
 	"net/url"
-	"sort"
 	"strconv"
-
-	"github.com/sliveryou/submail-go-sdk/util"
 )
 
-// New returns the submail common client.
-func New(appId, appKey, signType string) *Client {
-	return &Client{
-		appId:    appId,
-		appKey:   appKey,
-		signType: signType,
+// OptionFunc represents the submail common client option func.
+type OptionFunc func(c *Client)
+
+// WithHTTPClient makes the submail common client using the http client.
+func WithHTTPClient(client *http.Client) OptionFunc {
+	return func(c *Client) {
+		c.client = client
 	}
+}
+
+// New returns the submail common client.
+func New(appId, appKey, signType string, opts ...OptionFunc) *Client {
+	c := &Client{}
+	c.appId = appId
+	c.appKey = appKey
+	c.signType = signType
+	c.client = &http.Client{}
+
+	for _, opt := range opts {
+		opt(c)
+	}
+
+	return c
 }
 
 // GetTimestamp requests the submail timestamp service and returns the unix timestamp.
 func (c *Client) GetTimestamp() (string, error) {
-	resp, err := util.Get(timestampURL)
+	resp, err := c.Get(timestampURL)
 	if err != nil {
 		return "", err
 	}
@@ -57,35 +71,36 @@ func (c *Client) Sign(param Param) (url.Values, error) {
 		params.Add("sign_version", "2")
 	}
 
-	var keys []string
-	for key := range params {
-		if _, ok := notSignParams[key]; !ok {
-			keys = append(keys, key)
-		}
-	}
-	sort.Strings(keys)
-
-	values := url.Values{}
-	for _, key := range keys {
-		values.Add(key, params.Get(key))
-	}
-
 	signature := c.appKey
-	signStr := c.appId + c.appKey + values.Encode() + c.appId + c.appKey
 
 	if c.signType == SignTypeSha1 {
 		s := sha1.New()
-		s.Write([]byte(signStr))
+		s.Write([]byte(c.genSignStr(params)))
 		signature = hex.EncodeToString(s.Sum(nil))
 	} else if c.signType == SignTypeMd5 {
 		m := md5.New()
-		m.Write([]byte(signStr))
+		m.Write([]byte(c.genSignStr(params)))
 		signature = hex.EncodeToString(m.Sum(nil))
 	}
 
 	params.Add("signature", signature)
 
 	return params, nil
+}
+
+// genSignStr returns the string to be signed
+func (c *Client) genSignStr(params url.Values) string {
+	values := url.Values{}
+	for key := range params {
+		if _, ok := notSignParams[key]; !ok {
+			values.Add(key, params.Get(key))
+		}
+	}
+
+	e, _ := url.QueryUnescape(values.Encode())
+	signStr := c.appId + c.appKey + e + c.appId + c.appKey
+
+	return signStr
 }
 
 // Do requests the submail service by param.
@@ -102,9 +117,9 @@ func (c *Client) Do(param Param, enableMultipart ...bool) error {
 
 	var resp []byte
 	if !enable {
-		resp, err = util.Post(param.RequestURL(), params)
+		resp, err = c.Post(param.RequestURL(), params)
 	} else {
-		resp, err = util.PostMultipart(param.RequestURL(), params)
+		resp, err = c.PostMultipart(param.RequestURL(), params)
 	}
 	if err != nil {
 		return err
