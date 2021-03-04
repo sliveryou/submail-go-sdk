@@ -43,7 +43,6 @@ type SendParam struct {
 	Headers      map[string]string
 	Asynchronous bool
 	Attachments  []string
-	Tag          string
 }
 
 // Params implements the client.Param interface Params method.
@@ -86,10 +85,6 @@ func (p *SendParam) Params() (url.Values, error) {
 		params.Add("asynchronous", "true")
 	} else {
 		params.Add("asynchronous", "false")
-	}
-
-	if p.Tag != "" {
-		params.Add("tag", p.Tag)
 	}
 
 	if p.Html != "" {
@@ -153,7 +148,6 @@ type XSendParam struct {
 	Links        map[string]string
 	Headers      map[string]string
 	Asynchronous bool
-	Tag          string
 }
 
 // Params implements the client.Param interface Params method.
@@ -197,10 +191,6 @@ func (p *XSendParam) Params() (url.Values, error) {
 		params.Add("asynchronous", "true")
 	} else {
 		params.Add("asynchronous", "false")
-	}
-
-	if p.Tag != "" {
-		params.Add("tag", p.Tag)
 	}
 
 	if len(p.Vars) > 0 {

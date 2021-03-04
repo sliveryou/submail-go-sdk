@@ -23,7 +23,6 @@ func TestClient_Send(t *testing.T) {
 		Text:         "text",
 		Vars:         map[string]string{"code": "123456"},
 		Asynchronous: false,
-		Tag:          "tag",
 	}
 
 	err := c.Send(sp)
@@ -42,7 +41,6 @@ func TestClient_XSend(t *testing.T) {
 		Project:      "project",
 		Vars:         map[string]string{"code": "123456"},
 		Asynchronous: false,
-		Tag:          "tag",
 	}
 
 	err := c.XSend(xsp)

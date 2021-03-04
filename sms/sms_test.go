@@ -18,7 +18,6 @@ func TestClient_Send(t *testing.T) {
 	sp := &SendParam{
 		To:      "12345678910",
 		Content: "content",
-		Tag:     "tag",
 	}
 
 	err := c.Send(sp)
@@ -33,7 +32,6 @@ func TestClient_XSend(t *testing.T) {
 		To:      "12345678910",
 		Project: "project",
 		Vars:    map[string]string{"code": "123456"},
-		Tag:     "tag",
 	}
 
 	err := c.XSend(xsp)
@@ -50,7 +48,6 @@ func TestClient_MultiSend(t *testing.T) {
 			{To: "12345678910", Vars: map[string]string{"code": "123456"}},
 			{To: "13579246810", Vars: map[string]string{"code": "456123"}},
 		},
-		Tag: "tag",
 	}
 
 	err := c.MultiSend(msp)

@@ -24,7 +24,6 @@ type XSendParam struct {
 	To      string
 	Project string
 	Vars    map[string]string
-	Tag     string
 }
 
 // Params implements the client.Param interface Params method.
@@ -32,10 +31,6 @@ func (p *XSendParam) Params() (url.Values, error) {
 	params := url.Values{}
 	params.Add("to", p.To)
 	params.Add("project", p.Project)
-
-	if p.Tag != "" {
-		params.Add("tag", p.Tag)
-	}
 
 	if len(p.Vars) > 0 {
 		vars, err := json.Marshal(p.Vars)
@@ -64,17 +59,12 @@ type MultiParam struct {
 type MultiXSendParam struct {
 	Project string
 	Multi   []*MultiParam
-	Tag     string
 }
 
 // Params implements the client.Param interface Params method.
 func (p *MultiXSendParam) Params() (url.Values, error) {
 	params := url.Values{}
 	params.Add("project", p.Project)
-
-	if p.Tag != "" {
-		params.Add("tag", p.Tag)
-	}
 
 	if len(p.Multi) > 0 {
 		multi, err := json.Marshal(p.Multi)

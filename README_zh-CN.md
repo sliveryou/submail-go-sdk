@@ -34,7 +34,6 @@ func main() {
 	sp := &sms.SendParam{
 		To:      "12345678910",
 		Content: "content",
-		Tag:     "tag",
 	}
 
 	err := client.Send(sp)
@@ -46,7 +45,6 @@ func main() {
 		To:      "12345678910",
 		Project: "project",
 		Vars:    map[string]string{"code": "123456"},
-		Tag:     "tag",
 	}
 
 	err = client.XSend(xsp)
@@ -60,7 +58,6 @@ func main() {
 			{To: "12345678910", Vars: map[string]string{"code": "123456"}},
 			{To: "13579246810", Vars: map[string]string{"code": "456123"}},
 		},
-		Tag: "tag",
 	}
 
 	err = client.MultiSend(msp)
@@ -74,7 +71,6 @@ func main() {
 			{To: "12345678910", Vars: map[string]string{"code": "123456"}},
 			{To: "13579246810", Vars: map[string]string{"code": "456123"}},
 		},
-		Tag: "tag",
 	}
 
 	err = client.MultiXSend(mxsp)

@@ -15,7 +15,6 @@ func main() {
 		Text:         "text",
 		Vars:         map[string]string{"code": "123456"},
 		Asynchronous: false,
-		Tag:          "tag",
 	}
 
 	err := client.Send(sp)
@@ -31,7 +30,6 @@ func main() {
 		Project:      "project",
 		Vars:         map[string]string{"code": "123456"},
 		Asynchronous: false,
-		Tag:          "tag",
 	}
 
 	err = client.XSend(xsp)

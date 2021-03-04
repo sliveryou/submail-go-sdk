@@ -19,7 +19,6 @@ func TestClient_XSend(t *testing.T) {
 		To:      "12345678910",
 		Project: "project",
 		Vars:    map[string]string{"code": "123456"},
-		Tag:     "tag",
 	}
 
 	err := c.XSend(xsp)
@@ -36,7 +35,6 @@ func TestClient_MultiXSend(t *testing.T) {
 			{To: "12345678910", Vars: map[string]string{"code": "123456"}},
 			{To: "13579246810", Vars: map[string]string{"code": "456123"}},
 		},
-		Tag: "tag",
 	}
 
 	err := c.MultiXSend(mxsp)
