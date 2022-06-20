@@ -29,6 +29,10 @@ func New(appId, appKey, signType string, opts ...OptionFunc) *Client {
 	c.signType = signType
 	c.client = &http.Client{}
 
+	if c.signType == "" {
+		c.signType = SignTypeNormal
+	}
+
 	for _, opt := range opts {
 		opt(c)
 	}

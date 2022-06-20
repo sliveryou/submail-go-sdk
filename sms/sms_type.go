@@ -9,13 +9,13 @@ import (
 
 const (
 	// sendURL represents the submail sms send service url.
-	sendURL = client.APIDomain + "/message/send"
+	sendURL = client.APIDomain + "/sms/send"
 	// xsendURL represents the submail sms xsend service url.
-	xsendURL = client.APIDomain + "/message/xsend"
+	xsendURL = client.APIDomain + "/sms/xsend"
 	// multisendURL represents the submail sms multisend service url.
-	multisendURL = client.APIDomain + "/message/multisend"
+	multisendURL = client.APIDomain + "/sms/multisend"
 	// multixsendURL represents the submail sms multixsend service url.
-	multixsendURL = client.APIDomain + "/message/multixsend"
+	multixsendURL = client.APIDomain + "/sms/multixsend"
 )
 
 // Client represents the submail sms client.
@@ -111,17 +111,12 @@ func (p *MultiSendParam) RequestURL() string {
 type MultiXSendParam struct {
 	Project string
 	Multi   []*MultiParam
-	Tag     string
 }
 
 // Params implements the client.Param interface Params method.
 func (p *MultiXSendParam) Params() (url.Values, error) {
 	params := url.Values{}
 	params.Add("project", p.Project)
-
-	if p.Tag != "" {
-		params.Add("tag", p.Tag)
-	}
 
 	if len(p.Multi) > 0 {
 		multi, err := json.Marshal(p.Multi)

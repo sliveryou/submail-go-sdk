@@ -26,25 +26,23 @@ const (
 	StatusError = "error"
 
 	// APIDomain represents the submail api domain.
-	APIDomain = "https://api.mysubmail.com"
+	APIDomain = "https://api-v4.mysubmail.com"
 
 	// timestampURL represents the submail timestamp service url.
 	timestampURL = APIDomain + "/service/timestamp"
 )
 
-var (
-	// notSignParams represents the request not sign params.
-	notSignParams = map[string]struct{}{
-		"content":     {},
-		"vars":        {},
-		"multi":       {},
-		"html":        {},
-		"text":        {},
-		"links":       {},
-		"headers":     {},
-		"attachments": {},
-	}
-)
+// notSignParams represents the request not sign params.
+var notSignParams = map[string]struct{}{
+	"content":     {},
+	"vars":        {},
+	"multi":       {},
+	"html":        {},
+	"text":        {},
+	"links":       {},
+	"headers":     {},
+	"attachments": {},
+}
 
 // Param is the interface that wraps the Params and RequestURL methods.
 type Param interface {
