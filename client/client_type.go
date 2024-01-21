@@ -2,6 +2,7 @@ package client
 
 import (
 	"bytes"
+	"encoding/json"
 	"io"
 	"io/ioutil"
 	"mime/multipart"
@@ -152,11 +153,11 @@ type timestampResp struct {
 
 // commonResp represents the common service response.
 type commonResp struct {
-	Status                  string `json:"status"`
-	Code                    int    `json:"code"`
-	Msg                     string `json:"msg"`
-	SendId                  string `json:"send_id"`
-	Fee                     int    `json:"fee"`
-	SmsCredits              string `json:"sms_credits"`
-	TransactionalSmsCredits string `json:"transactional_sms_credits"`
+	Status                  string      `json:"status"`
+	Code                    int         `json:"code"`
+	Msg                     string      `json:"msg"`
+	SendId                  string      `json:"send_id"`
+	Fee                     json.Number `json:"fee"`
+	SmsCredits              string      `json:"sms_credits"`
+	TransactionalSmsCredits string      `json:"transactional_sms_credits"`
 }
