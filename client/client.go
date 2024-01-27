@@ -92,7 +92,7 @@ func (c *Client) Sign(param Param) (url.Values, error) {
 	return params, nil
 }
 
-// genSignStr returns the string to be signed
+// genSignStr returns the string to be signed.
 func (c *Client) genSignStr(params url.Values) string {
 	values := url.Values{}
 	for key := range params {
