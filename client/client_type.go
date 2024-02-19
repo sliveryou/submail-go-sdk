@@ -62,8 +62,8 @@ type Client struct {
 }
 
 // Get issues a get request to the specified URL and returns the response.
-func (c *Client) Get(url string) ([]byte, error) {
-	resp, err := c.client.Get(url)
+func (c *Client) Get(rawURL string) ([]byte, error) {
+	resp, err := c.client.Get(rawURL)
 	if err != nil {
 		return nil, err
 	}
@@ -78,8 +78,8 @@ func (c *Client) Get(url string) ([]byte, error) {
 }
 
 // Post issues a post form request to the specified URL and returns the response.
-func (c *Client) Post(url string, params url.Values) ([]byte, error) {
-	resp, err := c.client.PostForm(url, params)
+func (c *Client) Post(rawURL string, params url.Values) ([]byte, error) {
+	resp, err := c.client.PostForm(rawURL, params)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func (c *Client) Post(url string, params url.Values) ([]byte, error) {
 }
 
 // PostMultipart issues a post multipart request to the specified URL and returns the response.
-func (c *Client) PostMultipart(url string, params url.Values) ([]byte, error) {
+func (c *Client) PostMultipart(rawURL string, params url.Values) ([]byte, error) {
 	body := &bytes.Buffer{}
 	writer := multipart.NewWriter(body)
 
@@ -132,7 +132,7 @@ func (c *Client) PostMultipart(url string, params url.Values) ([]byte, error) {
 	contentType := writer.FormDataContentType()
 	_ = writer.Close()
 
-	resp, err := c.client.Post(url, contentType, body)
+	resp, err := c.client.Post(rawURL, contentType, body)
 	if err != nil {
 		return nil, err
 	}

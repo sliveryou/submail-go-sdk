@@ -5,12 +5,6 @@ run:
   tests: true
 
 linters-settings:
-  gosimple:
-    # https://staticcheck.io/docs/options#checks
-    checks: [ "all" ]
-  staticcheck:
-    # https://staticcheck.io/docs/options#checks
-    checks: [ "all" ]
   goconst:
     # https://github.com/jgautheron/goconst#usage
     ignore-tests: true
@@ -23,6 +17,11 @@ linters-settings:
   gofumpt:
     # https://github.com/mvdan/gofumpt#gofumpt
     extra-rules: true
+  gosimple:
+    # https://staticcheck.io/docs/options#checks
+    checks: [ "all" ]
+  interfacebloat:
+    max: 15
   revive:
     ignore-generated-header: true
     severity: warning
@@ -54,12 +53,12 @@ linters-settings:
       - name: get-return
       - name: modifies-parameter
       - name: confusing-results
-      # - name: deep-exit
+      - name: deep-exit
       - name: unused-parameter
       - name: unreachable-code
       # - name: add-constant
       - name: unnecessary-stmt
-      - name: struct-tag
+      # - name: struct-tag
       - name: modifies-value-receiver
       - name: constant-logical-expr
       - name: bool-literal-in-expr
@@ -73,7 +72,7 @@ linters-settings:
       - name: empty-lines
       - name: call-to-gc
       - name: duplicated-imports
-      # - name: import-shadowing
+      - name: import-shadowing
       - name: string-of-int
       - name: string-format
       - name: early-return
@@ -91,6 +90,9 @@ linters-settings:
       - name: redundant-import-alias
       - name: import-alias-naming
       - name: enforce-map-style
+  staticcheck:
+    # https://staticcheck.io/docs/options#checks
+    checks: [ "all", "-SA5008" ]
   stylecheck:
     # https://staticcheck.io/docs/options#checks
     checks: [ "all", "-ST1000", "-ST1003" ]
@@ -114,7 +116,7 @@ linters:
     - errname
     - errorlint
     - execinquery
-    - exhaustive
+    # - exhaustive
     - exportloopref
     - forcetypeassert
     - ginkgolinter
@@ -129,7 +131,7 @@ linters:
     - gofumpt
     - goheader
     - goimports
-    - gomnd
+    # - gomnd
     - gomoddirectives
     - gomodguard
     - goprintffuncname
@@ -165,7 +167,6 @@ linters:
     - sqlclosecheck
     - staticcheck
     - stylecheck
-    - tagalign
     - tenv
     - testableexamples
     - testifylint

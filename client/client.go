@@ -6,9 +6,11 @@ import (
 	"encoding/hex"
 	"encoding/json"
 	"errors"
+	"net"
 	"net/http"
 	"net/url"
 	"strconv"
+	"time"
 )
 
 // OptionFunc represents the submail common client option func.
@@ -27,7 +29,7 @@ func New(appId, appKey, signType string, opts ...OptionFunc) *Client {
 	c.appId = appId
 	c.appKey = appKey
 	c.signType = signType
-	c.client = &http.Client{}
+	c.client = newDefaultHTTPClient()
 
 	if c.signType == "" {
 		c.signType = SignTypeNormal
@@ -140,4 +142,29 @@ func (c *Client) Do(param Param, enableMultipart ...bool) error {
 		return errors.New(result.Msg)
 	}
 	return nil
+}
+
+func newDefaultHTTPClient() *http.Client {
+	tr := &http.Transport{
+		Proxy: http.ProxyFromEnvironment,
+		DialContext: (&net.Dialer{
+			Timeout:   15 * time.Second,
+			KeepAlive: 30 * time.Second,
+		}).DialContext,
+		MaxIdleConns:          100,
+		MaxIdleConnsPerHost:   100,
+		MaxConnsPerHost:       100,
+		IdleConnTimeout:       60 * time.Second,
+		ResponseHeaderTimeout: 10 * time.Second,
+		ExpectContinueTimeout: 5 * time.Second,
+		TLSHandshakeTimeout:   10 * time.Second,
+		ForceAttemptHTTP2:     true,
+	}
+
+	client := &http.Client{
+		Timeout:   20 * time.Second,
+		Transport: tr,
+	}
+
+	return client
 }

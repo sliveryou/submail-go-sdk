@@ -13,8 +13,10 @@ import (
 )
 
 // Get issues a get request to the specified URL and returns the response.
-func Get(url string) ([]byte, error) {
-	resp, err := http.Get(url)
+//
+// Deprecated: Use the client.Get instead.
+func Get(rawURL string) ([]byte, error) {
+	resp, err := http.Get(rawURL)
 	if err != nil {
 		return nil, err
 	}
@@ -29,8 +31,10 @@ func Get(url string) ([]byte, error) {
 }
 
 // Post issues a post form request to the specified URL and returns the response.
-func Post(url string, params url.Values) ([]byte, error) {
-	resp, err := http.PostForm(url, params)
+//
+// Deprecated: Use the client.Post instead.
+func Post(rawURL string, params url.Values) ([]byte, error) {
+	resp, err := http.PostForm(rawURL, params)
 	if err != nil {
 		return nil, err
 	}
@@ -45,7 +49,9 @@ func Post(url string, params url.Values) ([]byte, error) {
 }
 
 // PostMultipart issues a post multipart request to the specified URL and returns the response.
-func PostMultipart(url string, params url.Values) ([]byte, error) {
+//
+// Deprecated: Use the client.PostMultipart instead.
+func PostMultipart(rawURL string, params url.Values) ([]byte, error) {
 	var body bytes.Buffer
 	writer := multipart.NewWriter(&body)
 
@@ -83,7 +89,7 @@ func PostMultipart(url string, params url.Values) ([]byte, error) {
 	contentType := writer.FormDataContentType()
 	_ = writer.Close()
 
-	resp, err := http.Post(url, contentType, &body)
+	resp, err := http.Post(rawURL, contentType, &body)
 	if err != nil {
 		return nil, err
 	}
